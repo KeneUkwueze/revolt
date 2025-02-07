@@ -108,6 +108,6 @@ def generate_launch_description():
         revolt_control_timer,
         camera_arg,
         camera_timer,
-        # rplidar_arg,
-        # rplidar_timer,
+        rplidar_arg,
+        rplidar_timer,
     ])

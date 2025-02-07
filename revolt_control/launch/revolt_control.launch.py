@@ -47,20 +47,21 @@ def generate_launch_description():
 
     # We need the robot description to be passed to the controller_manager
     # So it can check the ros2_control parameters.
-    robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
+    # robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
 
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[{'robot_description': ParameterValue(robot_description, value_type=str)},
-                    controller_params_file],
+        parameters=[controller_params_file],
         remappings=[
             ('/diff_controller/cmd_vel', '/cmd_vel'), # Used if use_stamped_vel param is true
             ('/diff_controller/cmd_vel_unstamped', '/cmd_vel'), # Used if use_stamped_vel param is false
             ('/diff_controller/cmd_vel_out', '/cmd_vel_out'), # Used if publish_limited_velocity param is true
             ('/diff_controller/odom', '/odom'),
+            ("~/robot_description", "/robot_description"),
         ],
         output="both",
+        
     )
 
     joint_state_broadcaster_spawner = Node(

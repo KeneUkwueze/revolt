@@ -32,7 +32,7 @@ def get_robot_description(use_ros_control: str) -> str:
         mappings={
             'use_gazebo_ros_control': use_ros_control,
             'use_real_ros_control': 'false',
-            # 'use_fixed_caster': 'false',
+            'use_fixed_caster': 'false',
         },
     )
     robot_desc = doc.toprettyxml(indent='  ')
